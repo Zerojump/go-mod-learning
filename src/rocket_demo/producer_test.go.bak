@@ -1,0 +1,51 @@
+package rocket_demo
+
+import (
+	"fmt"
+	rocketmq "github.com/apache/rocketmq-client-go/core"
+	"testing"
+)
+
+func TestProductMsg(t *testing.T) {
+	pConfig := &rocketmq.ProducerConfig{
+		ClientConfig: rocketmq.ClientConfig{
+			GroupID:    "GID_XXXXXXXXXXXX",
+			NameServer: "http://192.168.204.128:9876",
+			//Credentials: &rocketmq.SessionCredentials{
+			//	AccessKey: "Your Access Key",
+			//	SecretKey: "Your Secret Key",
+			//	Channel:   "ALIYUN/OtherChannel",
+			//},
+		},
+		//Set to Common Producer as default.
+		ProducerModel: rocketmq.CommonProducer,
+	}
+	sendMessage(pConfig)
+}
+
+func sendMessage(config *rocketmq.ProducerConfig) {
+	producer, err := rocketmq.NewProducer(config)
+
+	if err != nil {
+		fmt.Println("create common producer failed, error:", err)
+		return
+	}
+
+	err = producer.Start()
+	if err != nil {
+		fmt.Println("start common producer error", err)
+		return
+	}
+	defer producer.Shutdown()
+
+	fmt.Printf("Common producer: %s started... \n", producer)
+	for i := 0; i < 10; i++ {
+		msg := fmt.Sprintf("%s-%d", "Hello,Common MQ Message-", i)
+		result, err := producer.SendMessageSync(&rocketmq.Message{Topic: "YourTopicXXXXXXXX", Body: msg})
+		if err != nil {
+			fmt.Println("Error:", err)
+		}
+		fmt.Printf("send message: %s result: %s\n", msg, result)
+	}
+	fmt.Println("shutdown common producer.")
+}
