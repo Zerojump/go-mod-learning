@@ -1,5 +1,7 @@
 package rocket_demo
 
-import (
-	_ "gopkg.in/couchbase/gocb.v1"
-)
+type User struct {
+	Id        string   `json:"uid"`
+	Email     string   `json:"email"`
+	Interests []string `json:"interests"`
+}
