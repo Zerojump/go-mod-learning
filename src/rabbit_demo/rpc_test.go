@@ -2,6 +2,7 @@ package rabbit_demo
 
 import (
 	"github.com/streadway/amqp"
+	"go13-learning/src/commons"
 	"log"
 	"math/rand"
 	"strconv"

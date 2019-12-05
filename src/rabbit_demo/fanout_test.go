@@ -3,6 +3,7 @@ package rabbit_demo
 import (
 	"fmt"
 	"github.com/streadway/amqp"
+	"go13-learning/src/commons"
 	"log"
 	"testing"
 	"time"
@@ -24,7 +25,7 @@ func TestEmit(t *testing.T) {
 	)
 	commons.FailOnError(err, "Failed to declare an exchange")
 
-	body := fmt.Sprintf("now is %s",time.Now())
+	body := fmt.Sprintf("now is %s", time.Now())
 	err = ch.Publish(
 		"logs", // exchange
 		"",     // routing key

@@ -3,6 +3,7 @@ package rabbit_demo
 import (
 	"bytes"
 	"fmt"
+	"go13-learning/src/commons"
 	"log"
 	"testing"
 	"time"
@@ -25,7 +26,7 @@ func TestTask(t *testing.T) {
 	)
 	commons.FailOnError(err, "Failed to declare a queue")
 
-	body := fmt.Sprintf("now is %s",time.Now())
+	body := fmt.Sprintf("now is %s", time.Now())
 	err = ch.Publish(
 		"",     // exchange
 		q.Name, // routing key

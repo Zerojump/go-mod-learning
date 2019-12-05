@@ -2,6 +2,7 @@ package rabbit_demo
 
 import (
 	"github.com/streadway/amqp"
+	"go13-learning/src/commons"
 	"log"
 	"testing"
 )
@@ -38,7 +39,7 @@ func TestReceive(t *testing.T) {
 
 	forever := make(chan bool)
 	go func() {
-		for d:=range msgs  {
+		for d := range msgs {
 			log.Printf("Received a message: %s", d.Body)
 		}
 	}()

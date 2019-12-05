@@ -7,7 +7,7 @@ import (
 )
 
 func TestConsume(t *testing.T) {
-	conf := &rocketmq.Config{Nameserver: "192.168.204.128:9876", ClientIp: "10.224.16.75", InstanceName: "DEFAULT",}
+	conf := &rocketmq.Config{Nameserver: "192.168.204.128:9876", ClientIp: "10.224.16.75", InstanceName: "DEFAULT"}
 	consumer, err := rocketmq.NewDefaultConsumer("C_TEST", conf)
 	if err != nil {
 		log.Panic(err)
@@ -21,11 +21,4 @@ func TestConsume(t *testing.T) {
 		return nil
 	})
 	consumer.Start()
-}
-
-func TestProduce(t *testing.T) {
-	conf := &rocketmq.Config{Nameserver: "192.168.204.128:9876", ClientIp: "10.224.16.75", InstanceName: "DEFAULT",}
-	mqClient := rocketmq.NewMqClient()
-	mqClient.
-
 }

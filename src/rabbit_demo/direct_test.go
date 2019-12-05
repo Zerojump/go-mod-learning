@@ -3,12 +3,13 @@ package rabbit_demo
 import (
 	"fmt"
 	"github.com/streadway/amqp"
+	"go13-learning/src/commons"
 	"log"
 	"testing"
 	"time"
-	"go13-learning/src/commons"
 )
 
+//先启动接收方
 func TestDirectEmit(t *testing.T) {
 	ch, err := conn.Channel()
 	commons.FailOnError(err, "Failed to open a channel")

@@ -3,6 +3,7 @@ package rabbit_demo
 import (
 	"fmt"
 	"github.com/streadway/amqp"
+	"go13-learning/src/commons"
 	"log"
 	"testing"
 	"time"
@@ -26,10 +27,10 @@ func TestTopicEmit(t *testing.T) {
 
 	body := fmt.Sprintf("now is %s", time.Now())
 	err = ch.Publish(
-		"logs_topic", // exchange
-		"to.from.fish.panda",           // routing key
-		false,        // mandatory
-		false,        // immediate
+		"logs_topic",         // exchange
+		"to.from.fish.panda", // routing key
+		false,                // mandatory
+		false,                // immediate
 		amqp.Publishing{
 			ContentType: "text/plain",
 			Body:        []byte(body),
